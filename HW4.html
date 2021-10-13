@@ -1,0 +1,134 @@
+
+<html>
+<head>
+    <script type = "text/javascript">
+        //ask user how many items they are getting
+        var hotdogs = prompt("Please enter the amount of HOTDOGS you would like",
+        "Number of hotdogs");
+        var fries = prompt("Please enter the amount of FRIES you would like", 
+        "Number of fries");
+        var drinks = prompt("Please enter the amount of DRINKS you would like",
+        "Number of drinks");
+        
+        var subtotal = hotdogs*3.75 + fries*2.00 + drinks*1.50;
+        //round subtotal to 2 decimal points 
+        subtotal = subtotal.toFixed(2);
+        
+        //initialize variables
+        var discount = 0;
+        var tax_amount = 0;
+        var total = 0;
+        
+        //if the subtotal is more than 20, add discount 
+        if (subtotal >= 20) {
+            discount = subtotal*0.10;
+            //round discount to 2 decimal places
+            discount = discount.toFixed(2);
+            //round subtotal to 2 decimal places
+            discounted_subtotal = subtotal - discount;
+            discounted_subtotal = discounted_subtotal.toFixed(2);
+            //add tax to order
+            tax_amount = discounted_subtotal*.0625;
+            //round tax_amount to 2 decimal places 
+            tax_amount = tax_amount.toFixed(2);
+            total = +discounted_subtotal + +tax_amount
+            //round total to 2 decimal places 
+            total = total.toFixed(2)
+            
+        }
+        //otherwise, order is not >= 20, so no discount is applied
+        else {
+            //add tax to order
+            tax_amount = subtotal*.0625;
+            //round tax_amount to 2 decimal places 
+            tax_amount = tax_amount.toFixed(2);
+            total = +subtotal + +tax_amount;
+            total = total.toFixed(2);
+        }
+        //To create the table, I used the internet, and more specifically
+        //stackoverflow and mozilladeveloper
+        function createTable() {
+            var body = document.getElementsByTagName('body')[0];
+            
+            var tble = document.createElement("table");
+            var tbleBody = document.createElement("tbody");
+            
+            //create cells
+            for (var i = 0; i <= 6; i++) {
+                //create rows 
+                var row = document.createElement("tr");
+                //Create first column of table
+                for (var j = 0; j < 1; j++) {
+                    var cell = document.createElement("td");
+                    if (i == 0){
+                        cellText = document.createTextNode("Hotdog");
+                    }
+                    else if (i == 1){
+                        cellText = document.createTextNode("Fries");
+                    }
+                    else if (i == 2){
+                        cellText = document.createTextNode("Drinks");
+                    }
+                    else if (i == 3){
+                        cellText = document.createTextNode("Subtotal");
+                    }
+                    else if (i == 4){
+                        cellText = document.createTextNode("Discount");
+                    }
+                    else if (i == 5){
+                        cellText = document.createTextNode("Tax Applied");
+                    }
+                    else if (i == 6){
+                        cellText = document.createTextNode("Order Total");
+                    }
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                }
+                //Create second column of table
+                for (var k = 0; k < 1; k++) {
+                    var cell = document.createElement("td");
+                    if (i == 0){
+                        cellText = document.createTextNode(hotdogs);
+                    }
+                    else if (i == 1){
+                        cellText = document.createTextNode(fries);
+                    }
+                    else if (i == 2){
+                        cellText = document.createTextNode(drinks);
+                    }
+                    else if (i == 3){
+                        cellText = document.createTextNode("$" + subtotal);
+                    }
+                    else if (i == 4){
+                        cellText = document.createTextNode("$" + discount);
+                    }
+                    else if (i == 5){
+                        cellText = document.createTextNode("$" + tax_amount);
+                    }
+                    else if (i == 6){
+                        cellText = document.createTextNode("$" + total);
+                    }
+                    cell.appendChild(cellText);
+                    row.appendChild(cell);
+                }
+                //add row 
+                tbleBody.appendChild(row);
+            }
+            
+            tble.appendChild(tbleBody);
+            body.appendChild(tble);
+            tble.setAttribute("border", "3");
+        }
+    </script>
+</head>
+
+<!--display information using HTML-->
+<body>
+    <h2> Your Order Summary from Joe's Hotdog Stand </h2>
+    <h3> <i>Come again soon!</i> </h3>
+    <script type="text/javascript">
+        createTable();
+    </script>
+</body>
+                
+</html>
